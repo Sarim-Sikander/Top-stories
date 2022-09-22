@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <!--From https://codepen.io/frytyler/pen/EGdtg-->
+
+  <head>
+    <meta charset="UTF-8" />
+
+    <title>Top Stories Searcher</title>
+
+    <!-- Loading font types -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Pacifico"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Arimo"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Hind:300"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
+
+  </head>
+
+  <body onload="myFunction()">
+    <div class="main">
+      <h1>Enter Query: </h1>
+      <!-- Main Input For Receiving Query to our ML -->
+      <form action="{{ url_for('predict')}}" method="post">
+        <textarea
+          id="text"
+          type="text"
+          name="text"
+          placeholder="Enter your text"
+          required="required"
+          size="50"
+          autocomplete="off"
+          rows="10"
+          cols="1000"
+        ></textarea>
+
+        <button
+          id="button"
+          type="submit"
+          class="btn btn-primary btn-block btn-large"
+          style="font-size: 20px"
+        >
+          Search
+        </button>
+      </form>
+      
+      <ul id ="pred" name="pred"> 
+        {% for a,b,d in titles %} 
+          <li><a id="pred" name="pred" href="/download/{{ d }}">Title: {{ a }}, Similarity: {{b}}</a> <a href='/download_file/{{ d }}'>Download</a></li> 
+        {% endfor %} 
+        </ul>
+    
+</div>
+      </body>
+</html>
